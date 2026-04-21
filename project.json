@@ -1,0 +1,24 @@
+{
+  "overview": "A personal home bodybuilding app with an interactive 3D exercise library, a customizable weekly workout scheduler, and workout tracking. Covers all home bodyweight exercises with animated 3D demonstrations and step-by-step instructions.",
+  "features": [
+    "Interactive 3D animated exercise demonstrations",
+    "Step-by-step instructions for all home bodyweight exercises",
+    "Exercises organized by muscle group (chest, back, legs, arms, shoulders, core)",
+    "Weekly workout scheduler with 7-day grid",
+    "Add, remove, and reorder exercises in your schedule",
+    "Workout session tracking with reps/sets logging",
+    "Workout history log",
+    "Customizable schedule with persistent storage"
+  ],
+  "category": "health-fitness",
+  "tags": [
+    "bodybuilding",
+    "fitness",
+    "home-workout",
+    "3d-visualization",
+    "workout-scheduler",
+    "exercise-tracker",
+    "bodyweight"
+  ],
+  "last_updated": "2026-04-21T12:32:05.535Z"
+}

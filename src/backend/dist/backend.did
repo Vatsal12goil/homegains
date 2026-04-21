@@ -1,0 +1,107 @@
+type WorkoutLog = 
+ record {
+   completedExercises: vec CompletedExercise;
+   date: Timestamp;
+   dayOfWeek: DayOfWeek;
+   id: LogId;
+   isActive: bool;
+ };
+type WeeklySchedule = 
+ record {
+   friday: DaySchedule;
+   monday: DaySchedule;
+   saturday: DaySchedule;
+   sunday: DaySchedule;
+   thursday: DaySchedule;
+   tuesday: DaySchedule;
+   wednesday: DaySchedule;
+ };
+type Timestamp = int;
+type ScheduledExercise = 
+ record {
+   exerciseId: ExerciseId;
+   notes: text;
+   reps: nat;
+   sets: nat;
+ };
+type MuscleGroup = 
+ variant {
+   arms;
+   back;
+   chest;
+   core;
+   legs;
+   shoulders;
+ };
+type LogId = nat;
+type ExerciseId = nat;
+type Exercise = 
+ record {
+   animationType: AnimationType;
+   description: text;
+   difficulty: Difficulty;
+   estimatedDurationSeconds: nat;
+   id: ExerciseId;
+   muscleGroup: MuscleGroup;
+   name: text;
+   steps: vec text;
+ };
+type Difficulty = 
+ variant {
+   advanced;
+   beginner;
+   intermediate;
+ };
+type DaySchedule = 
+ record {
+   day: DayOfWeek;
+   exercises: vec ScheduledExercise;
+ };
+type DayOfWeek = 
+ variant {
+   friday;
+   monday;
+   saturday;
+   sunday;
+   thursday;
+   tuesday;
+   wednesday;
+ };
+type CompletedExercise = 
+ record {
+   exerciseId: ExerciseId;
+   notes: text;
+   repsCompleted: nat;
+   setsCompleted: nat;
+ };
+type AnimationType = 
+ variant {
+   burpee;
+   crunch;
+   dip;
+   generic;
+   jumpingJack;
+   lunge;
+   mountainClimber;
+   plank;
+   pullUp;
+   pushUp;
+   squat;
+ };
+service : {
+  addExerciseToDay: (day: DayOfWeek, exercise: ScheduledExercise) -> ();
+  finishWorkoutSession: (logId: LogId) -> (bool);
+  getActiveWorkoutSession: () -> (opt WorkoutLog) query;
+  getAllExercises: () -> (vec Exercise) query;
+  getDaySchedule: (day: DayOfWeek) -> (DaySchedule) query;
+  getExercise: (id: ExerciseId) -> (opt Exercise) query;
+  getWeeklySchedule: () -> (WeeklySchedule) query;
+  getWorkoutHistory: () -> (vec WorkoutLog) query;
+  getWorkoutLog: (logId: LogId) -> (opt WorkoutLog) query;
+  logExerciseCompletion: (logId: LogId, completedExercise:
+   CompletedExercise) -> (bool);
+  removeExerciseFromDay: (day: DayOfWeek, exerciseId: ExerciseId) -> ();
+  reorderDayExercises: (day: DayOfWeek, orderedIds: vec ExerciseId) -> ();
+  startWorkoutSession: (day: DayOfWeek) -> (WorkoutLog);
+  updateDaySchedule: (day: DayOfWeek, exercises: vec ScheduledExercise) -> ();
+}

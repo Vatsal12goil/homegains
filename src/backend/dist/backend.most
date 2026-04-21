@@ -1,0 +1,82 @@
+// Version: 1.0.0
+type AnimationType__999636718 =
+  {
+    #burpee;
+    #crunch;
+    #dip;
+    #generic;
+    #jumpingJack;
+    #lunge;
+    #mountainClimber;
+    #plank;
+    #pullUp;
+    #pushUp;
+    #squat
+  };
+type CompletedExercise__1053752328 =
+  {
+    exerciseId : ExerciseId__592956379;
+    notes : Text;
+    repsCompleted : Nat;
+    setsCompleted : Nat
+  };
+type DayOfWeek__791624275 =
+  {#friday; #monday; #saturday; #sunday; #thursday; #tuesday; #wednesday};
+type DaySchedule__1061014934 =
+  {day : DayOfWeek__791624275; exercises : [ScheduledExercise__575347450]};
+type Difficulty__971497521 = {#advanced; #beginner; #intermediate};
+type ExerciseId__592956379 = Nat;
+type Exercise__1006227864 =
+  {
+    animationType : AnimationType__999636718;
+    description : Text;
+    difficulty : Difficulty__971497521;
+    estimatedDurationSeconds : Nat;
+    id : ExerciseId__592956379;
+    muscleGroup : MuscleGroup__607693759;
+    name : Text;
+    steps : [Text]
+  };
+type Exercise__95580520 = Exercise__1006227864;
+type LogId__472453763 = Nat;
+type MuscleGroup__607693759 =
+  {#arms; #back; #chest; #core; #legs; #shoulders};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type ScheduledExercise__575347450 =
+  {exerciseId : ExerciseId__592956379; notes : Text; reps : Nat; sets : Nat};
+type Timestamp__301639476 = Int;
+type WorkoutLog__198036355 =
+  {
+    completedExercises : [CompletedExercise__1053752328];
+    date : Timestamp__301639476;
+    dayOfWeek : DayOfWeek__791624275;
+    id : LogId__472453763;
+    isActive : Bool
+  };
+type WorkoutLog__873153980 = WorkoutLog__198036355;
+actor {
+  stable exercises :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Exercise__95580520]];
+      var elementIndex : Nat__490723111
+    };
+  stable logs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?WorkoutLog__873153980]];
+      var elementIndex : Nat__490723111
+    };
+  stable var nextLogId : Nat;
+  stable var schedule :
+    {
+      friday : DaySchedule__1061014934;
+      monday : DaySchedule__1061014934;
+      saturday : DaySchedule__1061014934;
+      sunday : DaySchedule__1061014934;
+      thursday : DaySchedule__1061014934;
+      tuesday : DaySchedule__1061014934;
+      wednesday : DaySchedule__1061014934
+    }
+};
